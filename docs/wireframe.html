@@ -1,0 +1,1206 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>착한 타일 - 와이어프레임</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700;900&display=swap');
+
+    :root {
+      --blue: #7AB3D4;
+      --pink: #E8A5B0;
+      --green: #5BBD72;
+      --gold: #D4A849;
+      --dark: #1E1E2E;
+      --gray: #6B7280;
+      --light: #F8F9FA;
+      --white: #FFFFFF;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: 'Noto Sans KR', sans-serif;
+      color: var(--dark);
+      background: #f0f0f0;
+    }
+
+    /* ── WIREFRAME LABEL ── */
+    .wf-badge {
+      position: fixed;
+      top: 12px;
+      right: 12px;
+      background: var(--dark);
+      color: white;
+      font-size: 11px;
+      padding: 4px 10px;
+      border-radius: 20px;
+      z-index: 9999;
+      letter-spacing: 1px;
+    }
+
+    /* ── HEADER ── */
+    header {
+      position: sticky;
+      top: 0;
+      background: white;
+      border-bottom: 1px solid #eee;
+      z-index: 100;
+      padding: 0 40px;
+      height: 64px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      text-decoration: none;
+    }
+
+    .logo-icon {
+      width: 44px;
+      height: 44px;
+      background: linear-gradient(135deg, #EAF4FB, #FAE8EC);
+      border-radius: 12px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+    }
+
+    .logo-eyes {
+      display: flex;
+      gap: 4px;
+      margin-bottom: 2px;
+    }
+
+    .logo-eye-left {
+      font-size: 12px;
+      font-weight: 900;
+      color: var(--blue);
+      line-height: 1;
+    }
+
+    .logo-eye-right {
+      font-size: 12px;
+      font-weight: 900;
+      color: var(--gold);
+      line-height: 1;
+    }
+
+    .logo-smile {
+      width: 16px;
+      height: 8px;
+      border: 2px solid var(--green);
+      border-top: none;
+      border-radius: 0 0 10px 10px;
+    }
+
+    .logo-text {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .logo-sub {
+      font-size: 10px;
+      color: var(--gray);
+      letter-spacing: 1px;
+    }
+
+    .logo-main {
+      font-size: 18px;
+      font-weight: 700;
+      color: var(--dark);
+      letter-spacing: -0.5px;
+    }
+
+    nav {
+      display: flex;
+      gap: 32px;
+      align-items: center;
+    }
+
+    nav a {
+      text-decoration: none;
+      color: var(--gray);
+      font-size: 14px;
+      font-weight: 500;
+      transition: color 0.2s;
+    }
+
+    nav a:hover { color: var(--dark); }
+
+    .btn-primary {
+      background: var(--dark);
+      color: white;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 8px;
+      font-size: 13px;
+      font-weight: 600;
+      cursor: pointer;
+      font-family: inherit;
+    }
+
+    .btn-outline {
+      background: transparent;
+      color: var(--dark);
+      border: 1.5px solid var(--dark);
+      padding: 10px 20px;
+      border-radius: 8px;
+      font-size: 13px;
+      font-weight: 600;
+      cursor: pointer;
+      font-family: inherit;
+    }
+
+    /* ── SECTION WRAPPER ── */
+    section {
+      position: relative;
+    }
+
+    .section-label {
+      position: absolute;
+      top: 12px;
+      left: 12px;
+      background: rgba(0,0,0,0.5);
+      color: white;
+      font-size: 10px;
+      padding: 3px 8px;
+      border-radius: 4px;
+      letter-spacing: 1px;
+      z-index: 10;
+    }
+
+    /* ── HERO ── */
+    .hero {
+      height: 100vh;
+      min-height: 600px;
+      background: linear-gradient(135deg, #EAF4FB 0%, #F5F0FA 50%, #FAE8EC 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: -100px;
+      left: -100px;
+      width: 400px;
+      height: 400px;
+      background: rgba(122,179,212,0.2);
+      border-radius: 50%;
+    }
+
+    .hero::after {
+      content: '';
+      position: absolute;
+      bottom: -80px;
+      right: -80px;
+      width: 300px;
+      height: 300px;
+      background: rgba(232,165,176,0.2);
+      border-radius: 50%;
+    }
+
+    .hero-content {
+      z-index: 1;
+    }
+
+    .hero-tag {
+      display: inline-block;
+      background: rgba(91,189,114,0.15);
+      color: var(--green);
+      font-size: 12px;
+      font-weight: 600;
+      padding: 6px 16px;
+      border-radius: 20px;
+      margin-bottom: 24px;
+      letter-spacing: 1px;
+    }
+
+    .hero h1 {
+      font-size: 56px;
+      font-weight: 900;
+      line-height: 1.2;
+      margin-bottom: 20px;
+      color: var(--dark);
+      letter-spacing: -2px;
+    }
+
+    .hero h1 span {
+      background: linear-gradient(135deg, var(--blue), var(--pink));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .hero p {
+      font-size: 16px;
+      color: var(--gray);
+      margin-bottom: 40px;
+      line-height: 1.8;
+    }
+
+    .hero-btns {
+      display: flex;
+      gap: 12px;
+      justify-content: center;
+    }
+
+    /* ── DONATION BANNER ── */
+    .donation-banner {
+      background: linear-gradient(135deg, var(--green), #3DA855);
+      color: white;
+      padding: 20px 40px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 16px;
+    }
+
+    .donation-banner .icon {
+      font-size: 28px;
+    }
+
+    .donation-banner p {
+      font-size: 15px;
+      font-weight: 500;
+    }
+
+    .donation-banner strong {
+      font-size: 18px;
+      font-weight: 900;
+    }
+
+    .donation-banner a {
+      color: white;
+      text-decoration: underline;
+      font-size: 13px;
+      opacity: 0.85;
+    }
+
+    /* ── STATS ── */
+    .stats {
+      padding: 80px 40px;
+      background: var(--dark);
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 40px;
+      text-align: center;
+    }
+
+    .stat-item .number {
+      font-size: 48px;
+      font-weight: 900;
+      color: white;
+      letter-spacing: -2px;
+    }
+
+    .stat-item .number span {
+      background: linear-gradient(135deg, var(--blue), var(--pink));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .stat-item .label {
+      font-size: 13px;
+      color: rgba(255,255,255,0.5);
+      margin-top: 6px;
+    }
+
+    /* ── SECTION COMMON ── */
+    .section-header {
+      text-align: center;
+      margin-bottom: 56px;
+    }
+
+    .section-tag {
+      display: inline-block;
+      background: #F0F9F2;
+      color: var(--green);
+      font-size: 11px;
+      font-weight: 700;
+      padding: 5px 14px;
+      border-radius: 20px;
+      margin-bottom: 14px;
+      letter-spacing: 2px;
+    }
+
+    .section-title {
+      font-size: 36px;
+      font-weight: 900;
+      letter-spacing: -1.5px;
+      color: var(--dark);
+    }
+
+    .section-sub {
+      font-size: 15px;
+      color: var(--gray);
+      margin-top: 10px;
+      line-height: 1.7;
+    }
+
+    /* ── PORTFOLIO PREVIEW ── */
+    .portfolio-section {
+      padding: 100px 40px;
+      background: var(--light);
+    }
+
+    .portfolio-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      margin-bottom: 40px;
+    }
+
+    .portfolio-header .section-header {
+      text-align: left;
+      margin-bottom: 0;
+    }
+
+    .portfolio-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      grid-template-rows: 240px 240px;
+      gap: 12px;
+    }
+
+    .portfolio-item {
+      border-radius: 16px;
+      overflow: hidden;
+      position: relative;
+      cursor: pointer;
+    }
+
+    .portfolio-item:first-child {
+      grid-row: 1 / 3;
+    }
+
+    .portfolio-item .img-placeholder {
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(135deg, #EAF4FB, #FAE8EC);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      color: var(--gray);
+      font-size: 13px;
+      gap: 8px;
+    }
+
+    .portfolio-item .img-placeholder .icon {
+      font-size: 32px;
+      opacity: 0.4;
+    }
+
+    .portfolio-overlay {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background: linear-gradient(transparent, rgba(30,30,46,0.85));
+      padding: 20px 16px 16px;
+      color: white;
+    }
+
+    .portfolio-overlay .tag {
+      font-size: 10px;
+      background: rgba(255,255,255,0.2);
+      padding: 2px 8px;
+      border-radius: 4px;
+      margin-bottom: 6px;
+      display: inline-block;
+    }
+
+    .portfolio-overlay .title {
+      font-size: 14px;
+      font-weight: 700;
+    }
+
+    /* ── SERVICES ── */
+    .services-section {
+      padding: 100px 40px;
+      background: white;
+    }
+
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+    }
+
+    .service-card {
+      border: 1px solid #eee;
+      border-radius: 20px;
+      padding: 32px 28px;
+      transition: box-shadow 0.2s;
+    }
+
+    .service-card:hover {
+      box-shadow: 0 8px 32px rgba(0,0,0,0.08);
+    }
+
+    .service-icon {
+      width: 52px;
+      height: 52px;
+      border-radius: 14px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 24px;
+      margin-bottom: 18px;
+    }
+
+    .service-card h3 {
+      font-size: 18px;
+      font-weight: 700;
+      margin-bottom: 10px;
+    }
+
+    .service-card p {
+      font-size: 13px;
+      color: var(--gray);
+      line-height: 1.7;
+    }
+
+    /* ── PROCESS ── */
+    .process-section {
+      padding: 80px 40px;
+      background: #F5F5F7;
+    }
+
+    .process-steps {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0;
+      margin-top: 48px;
+    }
+
+    .process-step {
+      text-align: center;
+      flex: 1;
+    }
+
+    .step-circle {
+      width: 64px;
+      height: 64px;
+      border-radius: 50%;
+      background: white;
+      border: 2px solid #eee;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 12px;
+      font-size: 22px;
+    }
+
+    .step-number {
+      font-size: 10px;
+      color: var(--green);
+      font-weight: 700;
+      letter-spacing: 1px;
+      margin-bottom: 4px;
+    }
+
+    .step-title {
+      font-size: 13px;
+      font-weight: 700;
+    }
+
+    .step-arrow {
+      flex: 0 0 40px;
+      text-align: center;
+      color: #ccc;
+      font-size: 20px;
+      padding-bottom: 32px;
+    }
+
+    /* ── DONATION SECTION ── */
+    .donation-section {
+      padding: 100px 40px;
+      background: linear-gradient(135deg, #F0F9F2, #EAF4FB);
+      text-align: center;
+    }
+
+    .donation-card {
+      max-width: 720px;
+      margin: 0 auto;
+      background: white;
+      border-radius: 32px;
+      padding: 60px 48px;
+      box-shadow: 0 20px 60px rgba(0,0,0,0.06);
+    }
+
+    .donation-percent {
+      font-size: 80px;
+      font-weight: 900;
+      color: var(--green);
+      letter-spacing: -4px;
+      line-height: 1;
+      margin-bottom: 8px;
+    }
+
+    .donation-percent span {
+      font-size: 40px;
+    }
+
+    .donation-card h2 {
+      font-size: 26px;
+      font-weight: 900;
+      margin-bottom: 16px;
+      letter-spacing: -1px;
+    }
+
+    .donation-card p {
+      font-size: 15px;
+      color: var(--gray);
+      line-height: 1.9;
+      margin-bottom: 32px;
+    }
+
+    .donation-activities {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+      margin-top: 32px;
+    }
+
+    .activity-item {
+      background: #F8F9FA;
+      border-radius: 16px;
+      padding: 20px;
+      text-align: center;
+    }
+
+    .activity-item .icon {
+      font-size: 28px;
+      margin-bottom: 8px;
+    }
+
+    .activity-item .name {
+      font-size: 13px;
+      font-weight: 700;
+      margin-bottom: 4px;
+    }
+
+    .activity-item .desc {
+      font-size: 11px;
+      color: var(--gray);
+    }
+
+    /* ── REVIEWS ── */
+    .reviews-section {
+      padding: 100px 40px;
+      background: var(--dark);
+    }
+
+    .reviews-section .section-tag {
+      background: rgba(91,189,114,0.15);
+      color: var(--green);
+    }
+
+    .reviews-section .section-title {
+      color: white;
+    }
+
+    .reviews-section .section-sub {
+      color: rgba(255,255,255,0.5);
+    }
+
+    .reviews-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+    }
+
+    .review-card {
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 20px;
+      padding: 28px;
+    }
+
+    .review-stars {
+      color: var(--gold);
+      font-size: 14px;
+      margin-bottom: 14px;
+    }
+
+    .review-text {
+      font-size: 14px;
+      color: rgba(255,255,255,0.8);
+      line-height: 1.8;
+      margin-bottom: 20px;
+    }
+
+    .review-author {
+      font-size: 12px;
+      color: rgba(255,255,255,0.4);
+    }
+
+    /* ── CTA ── */
+    .cta-section {
+      padding: 100px 40px;
+      background: linear-gradient(135deg, #EAF4FB, #FAE8EC);
+      text-align: center;
+    }
+
+    .cta-section h2 {
+      font-size: 40px;
+      font-weight: 900;
+      letter-spacing: -2px;
+      margin-bottom: 12px;
+    }
+
+    .cta-section p {
+      font-size: 15px;
+      color: var(--gray);
+      margin-bottom: 40px;
+    }
+
+    .cta-buttons {
+      display: flex;
+      gap: 12px;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    .btn-kakao {
+      background: #FEE500;
+      color: #1A1A1A;
+      border: none;
+      padding: 14px 28px;
+      border-radius: 12px;
+      font-size: 14px;
+      font-weight: 700;
+      cursor: pointer;
+      font-family: inherit;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .btn-phone {
+      background: white;
+      color: var(--dark);
+      border: 1.5px solid #ddd;
+      padding: 14px 28px;
+      border-radius: 12px;
+      font-size: 14px;
+      font-weight: 700;
+      cursor: pointer;
+      font-family: inherit;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .btn-estimate {
+      background: var(--dark);
+      color: white;
+      border: none;
+      padding: 14px 28px;
+      border-radius: 12px;
+      font-size: 14px;
+      font-weight: 700;
+      cursor: pointer;
+      font-family: inherit;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      background: #111;
+      color: rgba(255,255,255,0.5);
+      padding: 48px 40px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 40px;
+    }
+
+    footer .footer-logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 16px;
+    }
+
+    footer .footer-logo-icon {
+      width: 36px;
+      height: 36px;
+      background: rgba(255,255,255,0.08);
+      border-radius: 10px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
+
+    footer .footer-logo-eyes {
+      display: flex;
+      gap: 3px;
+    }
+
+    footer .footer-logo-eye-l { font-size: 10px; font-weight: 900; color: var(--blue); }
+    footer .footer-logo-eye-r { font-size: 10px; font-weight: 900; color: var(--gold); }
+
+    footer .footer-logo-smile {
+      width: 12px;
+      height: 6px;
+      border: 1.5px solid var(--green);
+      border-top: none;
+      border-radius: 0 0 8px 8px;
+    }
+
+    footer .footer-logo-name {
+      color: white;
+      font-size: 16px;
+      font-weight: 700;
+    }
+
+    footer .footer-info {
+      font-size: 12px;
+      line-height: 2;
+    }
+
+    footer .footer-info strong {
+      color: rgba(255,255,255,0.3);
+      font-size: 10px;
+      letter-spacing: 1px;
+      display: block;
+      margin-top: 8px;
+    }
+
+    footer .footer-right {
+      text-align: right;
+    }
+
+    footer .social-links {
+      display: flex;
+      gap: 10px;
+      justify-content: flex-end;
+      margin-bottom: 20px;
+    }
+
+    footer .social-btn {
+      width: 36px;
+      height: 36px;
+      background: rgba(255,255,255,0.08);
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 16px;
+      cursor: pointer;
+    }
+
+    footer .copyright {
+      font-size: 11px;
+    }
+
+    footer .donation-notice {
+      background: rgba(91,189,114,0.1);
+      border: 1px solid rgba(91,189,114,0.2);
+      border-radius: 8px;
+      padding: 8px 14px;
+      font-size: 11px;
+      color: var(--green);
+      margin-top: 12px;
+      display: inline-block;
+    }
+
+    /* ── FLOATING ── */
+    .floating-btns {
+      position: fixed;
+      bottom: 24px;
+      right: 24px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      z-index: 200;
+    }
+
+    .float-btn {
+      width: 52px;
+      height: 52px;
+      border-radius: 50%;
+      border: none;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 20px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+    }
+
+    .float-kakao { background: #FEE500; }
+    .float-phone { background: var(--green); color: white; }
+
+    /* ── PAGE DIVIDER ── */
+    .page-divider {
+      background: rgba(0,0,0,0.06);
+      text-align: center;
+      padding: 10px;
+      font-size: 11px;
+      color: #aaa;
+      letter-spacing: 2px;
+    }
+  </style>
+</head>
+<body>
+
+<div class="wf-badge">WIREFRAME v1.0</div>
+
+<!-- ── HEADER ── -->
+<header>
+  <a class="logo" href="#">
+    <div class="logo-icon">
+      <div class="logo-eyes">
+        <span class="logo-eye-left">착</span>
+        <span class="logo-eye-right">흥</span>
+      </div>
+      <div class="logo-smile"></div>
+    </div>
+    <div class="logo-text">
+      <span class="logo-sub">착한사람들</span>
+      <span class="logo-main">착한 타일</span>
+    </div>
+  </a>
+  <nav>
+    <a href="#about">소개</a>
+    <a href="#portfolio">시공사례</a>
+    <a href="#services">서비스</a>
+    <a href="#donation">착한활동</a>
+    <a href="#contact">문의</a>
+    <button class="btn-primary">무료 견적 받기</button>
+  </nav>
+</header>
+
+<!-- ── PAGE: HOME ── -->
+<div class="page-divider">[ HOME ]</div>
+
+<!-- SECTION: HERO -->
+<section class="hero">
+  <div class="section-label">SECTION · HERO</div>
+  <div class="hero-content">
+    <div class="hero-tag">수익금의 1%는 지역 사회에 기부됩니다</div>
+    <h1>착한 사람들이 만드는<br /><span>착한 공간</span></h1>
+    <p>경기도 이천을 중심으로, 정직한 가격과 꼼꼼한 시공으로<br />여러분의 공간을 새롭게 만들어 드립니다.</p>
+    <div class="hero-btns">
+      <button class="btn-primary" style="padding:14px 32px; font-size:15px;">시공 사례 보기</button>
+      <button class="btn-outline" style="padding:14px 32px; font-size:15px;">무료 견적 받기</button>
+    </div>
+  </div>
+</section>
+
+<!-- SECTION: DONATION BANNER -->
+<section>
+  <div class="section-label">SECTION · DONATION STRIP</div>
+  <div class="donation-banner">
+    <span class="icon">💚</span>
+    <p><strong>수익금의 1%</strong>를 지역 사회와 이웃을 위해 기부합니다 &nbsp;—&nbsp; 착한 타일의 약속</p>
+    <a href="#donation">자세히 보기 →</a>
+  </div>
+</section>
+
+<!-- SECTION: STATS -->
+<section>
+  <div class="section-label">SECTION · STATS</div>
+  <div class="stats">
+    <div class="stat-item">
+      <div class="number"><span>1,200</span>+</div>
+      <div class="label">누적 시공 건수</div>
+    </div>
+    <div class="stat-item">
+      <div class="number"><span>98</span>%</div>
+      <div class="label">고객 만족도</div>
+    </div>
+    <div class="stat-item">
+      <div class="number"><span>15</span>년+</div>
+      <div class="label">시공 경력</div>
+    </div>
+    <div class="stat-item">
+      <div class="number"><span>1</span>년</div>
+      <div class="label">무상 A/S 보장</div>
+    </div>
+  </div>
+</section>
+
+<!-- SECTION: PORTFOLIO PREVIEW -->
+<section class="portfolio-section" id="portfolio">
+  <div class="section-label">SECTION · PORTFOLIO PREVIEW</div>
+  <div class="portfolio-header">
+    <div class="section-header" style="text-align:left; margin-bottom:0;">
+      <div class="section-tag">PORTFOLIO</div>
+      <div class="section-title">최근 시공 사례</div>
+    </div>
+    <button class="btn-outline">전체 보기 →</button>
+  </div>
+  <div class="portfolio-grid">
+    <div class="portfolio-item">
+      <div class="img-placeholder">
+        <span class="icon">🏠</span>
+        <span>아파트 전체 시공</span>
+        <span style="font-size:11px; opacity:0.5">클릭 시 이미지 확대</span>
+      </div>
+      <div class="portfolio-overlay">
+        <span class="tag">주거 · 아파트</span>
+        <div class="title">경기도 이천 신축 아파트 욕실 전체 시공</div>
+      </div>
+    </div>
+    <div class="portfolio-item">
+      <div class="img-placeholder">
+        <span class="icon">☕</span>
+        <span>카페 상업 시공</span>
+      </div>
+      <div class="portfolio-overlay">
+        <span class="tag">상업 · 카페</span>
+        <div class="title">이천 카페 바닥 포인트 타일</div>
+      </div>
+    </div>
+    <div class="portfolio-item">
+      <div class="img-placeholder">
+        <span class="icon">🚿</span>
+        <span>욕실 리모델링</span>
+      </div>
+      <div class="portfolio-overlay">
+        <span class="tag">욕실 리모델링</span>
+        <div class="title">구축 빌라 욕실 전면 리모델링</div>
+      </div>
+    </div>
+    <div class="portfolio-item">
+      <div class="img-placeholder">
+        <span class="icon">🍳</span>
+        <span>주방 타일</span>
+      </div>
+      <div class="portfolio-overlay">
+        <span class="tag">주거 · 주방</span>
+        <div class="title">주방 서브웨이 타일 시공</div>
+      </div>
+    </div>
+    <div class="portfolio-item">
+      <div class="img-placeholder">
+        <span class="icon">🏢</span>
+        <span>상업 공간</span>
+      </div>
+      <div class="portfolio-overlay">
+        <span class="tag">상업 · 사무실</span>
+        <div class="title">신축 사무실 바닥 전체 시공</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SECTION: SERVICES -->
+<section class="services-section" id="services">
+  <div class="section-label">SECTION · SERVICES</div>
+  <div class="section-header">
+    <div class="section-tag">SERVICES</div>
+    <div class="section-title">시공 서비스</div>
+    <div class="section-sub">욕실부터 상업공간까지, 모든 공간의 타일 시공을 책임집니다</div>
+  </div>
+  <div class="services-grid">
+    <div class="service-card">
+      <div class="service-icon" style="background:#EAF4FB;">🚿</div>
+      <h3>욕실 타일 시공</h3>
+      <p>바닥, 벽면 전체 교체부터 부분 보수까지. 방수 처리 포함 꼼꼼한 마감 보장.</p>
+    </div>
+    <div class="service-card">
+      <div class="service-icon" style="background:#FFF3E0;">🍳</div>
+      <h3>주방 타일 시공</h3>
+      <p>서브웨이, 모자이크, 대형 타일 등 다양한 스타일 시공 가능.</p>
+    </div>
+    <div class="service-card">
+      <div class="service-icon" style="background:#F0F9F2;">🏠</div>
+      <h3>거실 / 방 바닥</h3>
+      <p>대리석, 포슬린, 세라믹 등 고급 자재를 활용한 거실 바닥 시공.</p>
+    </div>
+    <div class="service-card">
+      <div class="service-icon" style="background:#FAE8EC;">🏢</div>
+      <h3>상업 공간 시공</h3>
+      <p>카페, 식당, 사무실 등 상업 공간 전문 시공. 빠른 공기 준수.</p>
+    </div>
+    <div class="service-card">
+      <div class="service-icon" style="background:#EDE8FA;">🧱</div>
+      <h3>외부 타일 시공</h3>
+      <p>건물 외벽, 외부 계단 등 내후성 타일 시공 전문.</p>
+    </div>
+    <div class="service-card">
+      <div class="service-icon" style="background:#FFF8E1;">🔨</div>
+      <h3>철거 및 보수</h3>
+      <p>기존 타일 철거 및 하자 보수. 누수 방지 방수 처리 전문.</p>
+    </div>
+  </div>
+</section>
+
+<!-- SECTION: PROCESS -->
+<section class="process-section">
+  <div class="section-label">SECTION · PROCESS</div>
+  <div class="section-header">
+    <div class="section-tag">PROCESS</div>
+    <div class="section-title">시공 프로세스</div>
+  </div>
+  <div class="process-steps">
+    <div class="process-step">
+      <div class="step-circle">📞</div>
+      <div class="step-number">STEP 01</div>
+      <div class="step-title">문의 / 상담</div>
+    </div>
+    <div class="step-arrow">→</div>
+    <div class="process-step">
+      <div class="step-circle">📍</div>
+      <div class="step-number">STEP 02</div>
+      <div class="step-title">현장 방문</div>
+    </div>
+    <div class="step-arrow">→</div>
+    <div class="process-step">
+      <div class="step-circle">📋</div>
+      <div class="step-number">STEP 03</div>
+      <div class="step-title">견적 확정</div>
+    </div>
+    <div class="step-arrow">→</div>
+    <div class="process-step">
+      <div class="step-circle">🪣</div>
+      <div class="step-number">STEP 04</div>
+      <div class="step-title">시공 진행</div>
+    </div>
+    <div class="step-arrow">→</div>
+    <div class="process-step">
+      <div class="step-circle">✅</div>
+      <div class="step-number">STEP 05</div>
+      <div class="step-title">사후 관리</div>
+    </div>
+  </div>
+</section>
+
+<!-- ── PAGE: 착한 활동 ── -->
+<div class="page-divider">[ 착한 활동 섹션 ]</div>
+
+<!-- SECTION: DONATION -->
+<section class="donation-section" id="donation">
+  <div class="section-label">SECTION · DONATION</div>
+  <div class="donation-card">
+    <div class="donation-percent">1<span>%</span></div>
+    <h2>착한 타일의 1% 나눔 약속</h2>
+    <p>
+      착한 타일은 모든 시공 수익금의 1%를 지역 사회를 위해 기부합니다.<br />
+      단순히 타일을 붙이는 것을 넘어, 우리가 일하는 지역과 이웃에게<br />
+      따뜻한 마음을 전하고자 합니다.
+    </p>
+    <button class="btn-primary" style="padding:14px 28px; font-size:14px; border-radius:10px;">활동 스토리 보기</button>
+    <div class="donation-activities">
+      <div class="activity-item">
+        <div class="icon">👴</div>
+        <div class="name">독거노인 무상 시공</div>
+        <div class="desc">형편이 어려운 어르신 가정 무상 시공 지원</div>
+      </div>
+      <div class="activity-item">
+        <div class="icon">🏫</div>
+        <div class="name">지역 아동센터 환경 개선</div>
+        <div class="desc">아이들이 생활하는 공간을 새롭게</div>
+      </div>
+      <div class="activity-item">
+        <div class="icon">🤝</div>
+        <div class="name">저소득층 가정 지원</div>
+        <div class="desc">기초수급 가정 욕실 시공 지원</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SECTION: REVIEWS -->
+<section class="reviews-section">
+  <div class="section-label">SECTION · REVIEWS</div>
+  <div class="section-header">
+    <div class="section-tag">REVIEWS</div>
+    <div class="section-title">고객 후기</div>
+    <div class="section-sub">착한 타일을 경험한 고객분들의 이야기</div>
+  </div>
+  <div class="reviews-grid">
+    <div class="review-card">
+      <div class="review-stars">★★★★★</div>
+      <div class="review-text">"정말 꼼꼼하게 시공해 주셨어요. 마감 처리가 깔끔하고 기대 이상이었습니다. 다음에 또 맡길 예정입니다."</div>
+      <div class="review-author">경기도 이천시 · 아파트 욕실 시공</div>
+    </div>
+    <div class="review-card">
+      <div class="review-stars">★★★★★</div>
+      <div class="review-text">"가격도 합리적이고 결과도 만족스러웠어요. 무엇보다 약속한 날짜에 정확하게 맞춰주셔서 너무 좋았습니다."</div>
+      <div class="review-author">경기도 여주시 · 카페 바닥 시공</div>
+    </div>
+    <div class="review-card">
+      <div class="review-stars">★★★★★</div>
+      <div class="review-text">"1% 기부 활동을 알고 더 믿음이 갔습니다. 시공도 훌륭하고 업체 마인드도 좋아서 주변에 적극 추천하고 있어요."</div>
+      <div class="review-author">경기도 광주시 · 주택 전체 시공</div>
+    </div>
+  </div>
+</section>
+
+<!-- SECTION: CTA -->
+<section class="cta-section" id="contact">
+  <div class="section-label">SECTION · CTA</div>
+  <h2>지금 바로 무료 견적을 받아보세요</h2>
+  <p>전화, 카카오톡, 온라인 폼 — 편하신 방법으로 연락 주세요</p>
+  <div class="cta-buttons">
+    <button class="btn-kakao">💬 카카오톡 상담하기</button>
+    <button class="btn-phone">📞 010-9271-0988</button>
+    <button class="btn-estimate">온라인 견적 신청하기</button>
+  </div>
+</section>
+
+<!-- ── FOOTER ── -->
+<footer>
+  <div class="footer-left">
+    <div class="footer-logo">
+      <div class="footer-logo-icon">
+        <div class="footer-logo-eyes">
+          <span class="footer-logo-eye-l">착</span>
+          <span class="footer-logo-eye-r">흥</span>
+        </div>
+        <div class="footer-logo-smile"></div>
+      </div>
+      <span class="footer-logo-name">착한사람들 · 착한타일</span>
+    </div>
+    <div class="footer-info">
+      <strong>CONTACT</strong>
+      대표 강정호 &nbsp;|&nbsp; 010-9271-0988 &nbsp;|&nbsp; 031-334-7881<br />
+      xhdn1201@naver.com
+      <strong>ADDRESS</strong>
+      경기도 이천시 백사면 청백리로89번길 16 M520 빌리지 203동 17호
+      <strong>HOURS</strong>
+      평일 09:00 – 18:00 &nbsp;|&nbsp; 토요일 09:00 – 13:00
+    </div>
+    <div class="donation-notice">💚 수익금의 1%는 지역 사회 기부에 사용됩니다</div>
+  </div>
+  <div class="footer-right">
+    <div class="social-links">
+      <div class="social-btn" title="카카오톡">💬</div>
+      <div class="social-btn" title="인스타그램">📸</div>
+      <div class="social-btn" title="네이버 블로그">📝</div>
+    </div>
+    <div class="copyright">© 2025 착한사람들 착한타일. All rights reserved.</div>
+  </div>
+</footer>
+
+<!-- ── FLOATING BUTTONS ── -->
+<div class="floating-btns">
+  <button class="float-btn float-kakao" title="카카오톡 상담">💬</button>
+  <button class="float-btn float-phone" title="전화 문의">📞</button>
+</div>
+
+</body>
+</html>
